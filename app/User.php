@@ -1,0 +1,34 @@
+<?php
+
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+    public $timestamps = false;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $table = 'users';
+    protected $primaryKey = 'userid';
+    protected $fillable = [
+        'username', 'email', 'password','dateofbirth','address','level','phonenumber','gender'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+    public function product(){
+        return $this->hasMany('App\products');
+    }
+}
